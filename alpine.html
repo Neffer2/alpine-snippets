@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Alpine</title>
+	<script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+	<style type="text/css">
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+
+	<!-- Defino una varaible dentro del componente -->
+	<!-- Cambio la variable cuando haya click en el botón (eventos) -->
+	<div x-data="menu" x-init="construct" @click.outside="Close">
+		<!-- x-bind para agregar y quitar atributos dinamicamente -->
+		<button @click="isOpen" x-bind:disabled="open"> Menu </button>
+
+
+
+		<!-- x-show esconde o muestra y recibe un bool -->
+		<!-- Cambio la variable cuando haya click fuera del nav (eventos) -->
+		<!-- x-show="open" -->
+		<!-- x-bind:class="{'hidden': !open}" -->
+		<!-- NOTA: los eventos no se ejecutan si el elemenoto estpá escondido -->
+		<div class="hidden" :class="{'hidden': !open}"> 
+			<ul>
+				<li>Item 1</li>
+				<li>Item 2</li>
+				<li>Item 3</li>
+				<li>Item 4</li>
+			</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function menu (){
+			return {
+				open: null,
+				isOpen(){
+					this.open = !this.open
+				},
+				Close(){
+					this.open = false
+				},
+				construct(){
+					console.log("Soy un constructor");
+					this.open = false;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
